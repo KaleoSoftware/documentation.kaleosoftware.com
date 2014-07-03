@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Kaleo Documentation</title>
@@ -5,31 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
 
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
-    <script src='legacy.js'></script>
-    <script src='flatdoc.js'></script>
-    <!-- Flatdoc theme (optional) -->
-    <script src='theme-white/script.js'></script>
-    <link  href='theme-white/style.css' rel='stylesheet'>
+    <script type='application/javascript' src='flatdoc/legacy.js'></script>
+    <script type='application/javascript' src='flatdoc/jquery-1.8.2.js'></script>
+    <script type='text/javascript' src='flatdoc/flatdoc.js'></script>
+    <script type='text/javascript' src='flatdoc/theme-white/script.js'></script>
+    <link  href='flatdoc/theme-white/style.css' rel='stylesheet'>
 
-    <meta content="Kaleo Documentation" property="og:title">
-    <meta content="Kaleo Documentation" name="description">
-
-    <style>
-    .k-header {
-      font-size:34;
-      line-height: 36px;
-      font-weight: bold;
-      margin-top: 8px;
-      margin-left: 20px;
-    }
-    .pull-left {
-      float: left;
-    }
-
-    </style>
-
-    <!-- Initializer -->
     <script>
       // Patch to load multiple md files
       Flatdoc.file = function(locations) {
@@ -48,9 +30,49 @@
       };
 
       Flatdoc.run({
-        fetcher: Flatdoc.file(['/docs/Sharepoint Integration Guide.md'])
+        fetcher: Flatdoc.file(['docs/Widget Guide.md','docs/Sharepoint Integration Guide.md'])
       });
     </script>
+
+    <meta content="Kaleo Documentation" property="og:title">
+    <meta content="Kaleo Documentation" name="description">
+
+    <style>
+      .large-brief .content  h1 + p,
+      .content > p.brief {
+        font-size: 1.3em;
+        font-family: Open Sans, sans-serif;
+        font-weight: 300;
+      }
+
+      .well {
+        margin: 5px 10px 5px 10px;
+        padding: 10px;
+        background-color: #FFFFC2;
+        border-radius: 10px;
+      }
+
+      .k-header {
+        font-size: 34px;
+        line-height: 36px;
+        font-weight: bold;
+        margin-top: 8px;
+        margin-left: 20px;
+      }
+      .pull-left {
+        float: left;
+      }
+      .ie-alert {
+        margin: 10px 50px 10px 50px;
+        padding: 10px;
+        background-color: #DF1546;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+    </style>
+
   </head>
 
   <body role='flatdoc' class='large-brief no-literate'>
@@ -72,11 +94,20 @@
       -->
     </div>
 
+    <!--[if lt IE 9]>
+      <div class="ie-alert">
+        Please use IE9+, FireFox or Chrome to view these guides.
+      </div>
+    <![endif]-->
     <div class='content-root'>
       <div class='menubar'>
         <div class='menu section' role='flatdoc-menu'></div>
       </div>
       <div role='flatdoc-content' class='content'></div>
     </div>
+
+
+
+
   </body>
 </html>
