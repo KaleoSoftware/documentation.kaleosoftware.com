@@ -57,9 +57,11 @@ You can then go to SharePoint and use that sitemap URL as the root URL for a new
 
 ## SharePoint OpenSearch
 
-SharePoint has the ability to integrate search results from any OpenSearch compliant search service, and Kaleo exposes a search API that conforms to the OpenSearch standard. You configure this in SharePoint like so:
+SharePoint has the ability to integrate search results from any OpenSearch compliant search service, and Kaleo exposes a search API that conforms to the OpenSearch standard. You configure this in SharePoint like below, where Source URL is
 
-![](http://kaleo-web.s3.amazonaws.com/documentation_images/sharepoint-opensearch-setup.png)
+`https://your-tenant-name.kaleosoftware.com/widgets/search_results.rss?widget_token=your-token&term={searchTerms}`
+
+![](/images/sharepoint-opensearch-setup.png)
 
 When the user types in a search query, SharePoint calls out to the Kaleo API and gathers the results to present to the user. The results are not intermingled with other SharePoint content, and cannot be sorted by relevance with respect to non-Kaleo content. Snippets of content are returned as part of the results that highlight keyword matches within the Kaleo content, making it easier for the user to determine if the content is relevant to them.
 
