@@ -25,7 +25,7 @@ The standard Kaleo Search Widget looks like this, and to create this widget, we 
 
 **Name:**  Descriptive name, like "Widget for JDE (Production)"
 
-**Board:**  Which Kaleo Board this Widget should be linked to. Search willl only show results from the linked Board.
+**Board:**  Which Kaleo Board this Widget should be linked to. Search will only show results from the linked Board.
 
 **Authentication Token:** Leave this field blank and Kaleo will auto-generate a strong authentication token, or you can enter your own.
 
