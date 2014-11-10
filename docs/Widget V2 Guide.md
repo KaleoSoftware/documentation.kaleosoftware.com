@@ -8,7 +8,7 @@ The Kaleo Widget is built using standard web technologies (HTML/JavaScript/CSS).
 
 ## ActiveDirectory
 
-The Kaleo Widget assumes that the user already has an authenticated, secure session established with the kaleosoftware.com website in order to function.  Typically, this is done by first ensuring that Kaleo is linked via SAML to your corporate directory (Microsoft ActiveDirectory, Okta, OneLogin, etc).  Details of this integration can be found in the “Kaleo SSO ADFS Integration” document.
+The Kaleo Widget assumes that the user already has an authenticated, secure session established with the kaleosoftware.com website in order to function.  Typically, this is done by first ensuring that Kaleo is linked via SAML to your corporate directory (Microsoft ActiveDirectory, Okta, OneLogin, etc).  Details of this integration can be found in the [Kaleo SSO ADFS Integration](/KaleoSSOADFSIntegration/KaleoSSOADFSIntegration.html) document.
 
 ## Uncredentialed Access
 
