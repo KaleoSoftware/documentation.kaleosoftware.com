@@ -13,6 +13,7 @@
     <link  href='flatdoc/theme-white/style.css' rel='stylesheet'>
 
     <script>
+      $.ajaxSetup({ cache: false });
       // Patch to load multiple md files
       Flatdoc.file = function(locations) {
         function loadData(locations, response, callback) {
@@ -30,7 +31,7 @@
       };
 
       Flatdoc.run({
-        fetcher: Flatdoc.file(['docs/Widget Guide.md','docs/Widget V2 Guide.md', 'docs/Sharepoint Integration Guide.md', 'docs/API Guide.md', 'docs/SSO SAML Guide.md', 'docs/System Security.md'])
+        fetcher: Flatdoc.file(['docs/Widget Guide.md','docs/Widget V2 Guide.md', 'docs/Sharepoint Integration Guide.md', 'docs/Salesforce Widget Guide.md', 'docs/API Guide.md', 'docs/SSO SAML Guide.md', 'docs/System Security.md'])
       });
     </script>
 

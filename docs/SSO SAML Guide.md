@@ -1,12 +1,71 @@
 # SSO SAML Guide
 
-Kaleo supports the SAML protocol for Single-Sign-On (SSO). Your SAML metadata can be found here:
+Kaleo supports Single Sign On (SSO), by integrating with corporate Identity Providers (IdP) (i.e. Microsoft Active Directory, Salesforce.com, Okta.com, OneLogin.com) via the SAML protocol, in which the user’s web browser mediates communications between Kaleo and the IdP. In this way, Kaleo does not need any access or permissions to resources inside a private corporate network. Kaleo does not need to integrate directly with the IdP. Instead, a Kaleo user account can be provisioned just-in-time when a login request is made. Kaleo uses the cryptographically verified user information from the IdP (including first name, last name, email, job title, department, location) to immediately create an account in the Kaleo system, and then logs the user in, for a seamless experience.
 
-https://your-tenant.kaleosoftware.com/sso/saml_metadata
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Kaleo-SAML-SSO-Architecture-Diagram.png)
 
-## ADFS Online Docs
+### Kaleo SAML Configuration
+
+Your tenant must be configured for SSO. The following settings in Tenant Admin -> Settings should be created:
+
+```
+authentication.saml.enabled: true
+authentication.saml.idp_sso_target_url: https://YOUR_IDP_URL_HERE
+# The fingerprint of your X509 certificate
+authentication.saml.idp_cert_fingerprint: 12:34:56:67:89
+
+# For IE Windows-based authentication
+authentication.saml.authentication_context: urn:federation:authentication:windows
+
+# For Web-based Forms authentication
+authentication.saml.authentication_context: urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+
+# The default assertion claims for user info are these. Customize the values to suit your IdP
+authentication.saml.claims.firstname:  http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+authentication.saml.claims.lastname:  http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+authentication.saml.claims.job_title:  http://schemas.microsoft.com/ws/2008/06/identity/claims/role
+authentication.saml.claims.department:  http://schemas.xmlsoap.org/claims/Group
+authentication.saml.claims.location:  location
+authentication.saml.claims.mobile_phone: mobile_phone
+
+```
+
+### SAML Metadata
+
+Your SAML metadata can be found here:
+
+https://<YOUR TENANT NAME HERE>.kaleosoftware.com/sso/saml_metadata
+
+This metadata XML can be imported into most IdP systems. Otherwise, by viewing the information in the XML document, you can manually configure your IdP according to its documentation.
+
+## ADFS IdP Configuration
 
 For instructions on how to configure Microsoft ADFS to work with Kaleo, read this [guide](/KaleoSSOADFSIntegration/KaleoSSOADFSIntegration.html).
+
+## Salesforce IdP Configuration
+
+Salesforce.com can be used as an IdP, and Kaleo can authenticate users against it.  First you need to set up an Authentication Provider, and then you need to set up Remote Access for Kaleo.
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Auth-Provider-1.jpg)
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Auth-Provider-2.jpg)
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Remote-Access-1.jpg)
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Remote-Access-2.jpg)
+
+### Kaleo Salesforce Settings
+
+In Tenant Admin -> Settings, the following settings need to be created:
+
+```
+authentication.salesforce.enabled: true
+authentication.salesforce.client_id: YOUR CLIENT ID
+authentication.salesforce.client_secret: YOUR SECRET
+authentication.salesforce.site:  https://login.salesforce.com
+authentication.salesforce.authorize_url:  /services/oauth2/authorize
+```
+
 
 ## SAML Token Signing
 
@@ -21,6 +80,10 @@ With Request Signing configured to be active, Kaleo would instead send a request
 ```
 https://adfs.company.com/adfs/ls/?SAMLRequest=...Base64 Encoded XML Request...&RelayState=http%3A%2F%2Ftenant.kaleosoftware.com%2Fusers%2Fauth%2Fsaml&SigAlg=http%3A%2F%2Fwww.w3.org%2F2000%2F09%2Fxmldsig%23rsa-sha1&Signature=...Base64 Encoded Signature...
 ```
+
+To configure your Kaleo instance for Request Signing, go to the Tenant Admin -> Settings, and create a new setting:
+
+`authentication.saml.sign_requests` and set it's value to `false`.
 
 Kaleo will sign requests with a CA-signed certificate. The Kaleo key and the certificate trust chain are below.
 

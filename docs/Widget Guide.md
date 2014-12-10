@@ -12,7 +12,7 @@ The Kaleo Widget assumes that the user already has an authenticated, secure sess
 
 ## Implementation
 
-The Kaleo Widget is made up of 2 main parts.  The first is the actual widget code that is specified in the Kaleo Admin page.  On this page, you can create a new Widget, specify which Kaleo Board it is tied to, and define the HTML/JavaScript/CSS code that will be injected into the target app. You can access this page via the My Account -> Admin Panel menu. (Your Kaleo Customer Success representitive will have most likely configured this for you already.)
+The Kaleo Widget is made up of 2 main parts.  The first is the actual widget code that is specified in the Kaleo Admin page.  On this page, you can create a new Widget, specify which Kaleo Board it is tied to, and define the HTML/JavaScript/CSS code that will be injected into the target app. You can access this page via the My Account -> Admin Panel menu. (Your Kaleo Customer Success representative will have most likely configured this for you already.)
 
 The second part is a small snippet of JavaScript code called the *Kaleo Widget Injector*, that connects to kaleosoftware.com and grabs the specified Widget using the Widget Token, and injects the HTML/JavaScript/CSS into the target page.
 
@@ -49,10 +49,10 @@ The standard Kaleo Search Widget looks like this, and to create this widget, we 
 </div>
 ```
 
-**Embedded CSS:** This is the raw CSS code that will be injected into the target page. (This is actually SCSS, so any advanced features of SCSS can be used.)
+**Embedded CSS:** This is the raw CSS code that will be injected into the target page.
 
-```scss
-@import "kaleo/widgets/search_ui.css.scss";
+```css
+.kaleoWidget {width: 150px;}
 ```
 
 **Embedded JavaScript:**  This is the code that will be run by the Kaleo Injector, and this code should handle inserting the Embedded HTML, which is available in a JavaScript global variable called `KALEO_EMBEDDED_HTML`.

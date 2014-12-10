@@ -26,7 +26,15 @@ The create a widget, we will first go to the My Account -> Admin Panel page, and
 
 **Name:**  Descriptive name, like "Widget for JDE (Production)"
 
-**Board:**  Which Kaleo Board this Widget should be linked to. Search will only show results from the linked Board.
+**Board:**  Which Kaleo Board this Widget should be linked to. Search will only show results from the linked Board (unless you have specified Multiple Boards below).
+
+**Multiple Boards:** This section is used to specify multiple boards the widget will have access to. The format is YAML, and should look like this:
+
+```
+---
+- board_id: 34
+- board_id: 89
+```
 
 **Authentication Token:** Leave this field blank and Kaleo will auto-generate a strong authentication token, or you can enter your own.
 
