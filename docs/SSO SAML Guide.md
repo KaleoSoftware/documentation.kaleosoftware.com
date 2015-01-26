@@ -48,7 +48,7 @@ For instructions on how to configure Microsoft ADFS to work with Kaleo, read thi
 
 ## Salesforce SAML Configuration
 
-Salesforce.com can be used as a SAML provider, and Kaleo can authenticate users against it.  
+Salesforce.com can be used as a SAML provider, and Kaleo can authenticate users against it.
 
 ### Enable Salesforce as an identity provider
 
@@ -66,61 +66,28 @@ The salesforce documentation for this process can be found [here](https://help.s
 
 <img src="/images/SF-CreateApp.png" width="800px" />
 
-From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint".  o the /admin panel of kaleosoftware.com 
+From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint".  o the /admin panel of kaleosoftware.com
 
 <img src="/images/SF-AppView.png" width="800px" />
 
 ### Configure Kaleo
 
-Open your downloaded certificate, and extract the fingerprint code from it.  On a mac, right click the cert and "open" it. 
+Open your downloaded certificate, and extract the fingerprint code from it.  On a mac, right click the cert and "open" it.
 
 <img src="/images/CertAuth.png" width="800px" />
 
 As an admin in Kaleo Software, go to My Account -> Admin Panel -> Settings.  (This URL will be https://<your domain.kaleosoftware.com/admin).
 
-The following settings need to be created: 
+The following settings need to be created:
 
 ```
 authentication.saml.idp_cert_fingerprint=<fingerprint from cert>
 authentication.saml.idp_sso_target_url=<<Enter SP-Initiated POST Endpoint URL from earlier>>
 authentication.saml.enabled=true
 ```
-The final state should look something like:  
+The final state should look something like:
 
 <img src="/images/SF-KaleoAdminConfigured.png" width="800px" />
-
-## Salesforce IdP Configuration
-
-Salesforce.com can be used as an IdP, and Kaleo can authenticate users against it.  First you need to set up an Authentication Provider, and then you need to set up Remote Access for Kaleo.
-
-![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Auth-Provider-1.jpg)
-
-![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Auth-Provider-2.jpg)
-
-![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Remote-Access-1.jpg)
-
-![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Remote-Access-2.jpg)
-
-
-For newer versions of Salesforce that have the Connected Apps feature (instead of Remote Access), set Kaleo up like so:
-
-![](/images/SF-Apps.jpg)
-
-![](/images/SF-NewConnectedApp.jpg)
-
-
-### Kaleo Salesforce Settings
-
-In your Kaleo site, Tenant Admin -> Settings, the following settings need to be created. Create a new Setting for each key, and set the value to the appropriate value for your configuration:
-
-```
-key: value
-authentication.salesforce.enabled: true
-authentication.salesforce.client_id: YOUR CLIENT ID
-authentication.salesforce.client_secret: YOUR SECRET
-authentication.salesforce.site:  https://login.salesforce.com
-authentication.salesforce.authorize_url:  /services/oauth2/authorize
-```
 
 
 ## SAML Token Signing
