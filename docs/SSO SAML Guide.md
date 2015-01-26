@@ -1,10 +1,10 @@
 # SSO SAML Guide
 
-Kaleo supports Single Sign On (SSO), by integrating with corporate Identity Providers (IdP) (i.e. Microsoft Active Directory, Salesforce.com, Okta.com, OneLogin.com) via the SAML protocol, in which the user’s web browser mediates communications between Kaleo and the IdP. In this way, Kaleo does not need any access or permissions to resources inside a private corporate network. 
+Kaleo supports Single Sign On (SSO), by integrating with corporate Identity Providers (IdP) (i.e. Microsoft Active Directory, Salesforce.com, Okta.com, OneLogin.com) via the SAML protocol, in which the user’s web browser mediates communications between Kaleo and the IdP. In this way, Kaleo does not need any access or permissions to resources inside a private corporate network.
 
 ### User Provisioning
 
-Kaleo does not need to integrate directly with the IdP. Instead, a Kaleo user account can be provisioned just-in-time when a login request is made. Kaleo uses the cryptographically verified user information from the IdP (including first name, last name, email, job title, department, location) to immediately create an account in the Kaleo system, and then logs the user in, for a seamless experience.  Kaleo can be configured to allow logins **only** from your IdP, so if a user is removed from your IdP then they no longer will have the ability to log in to the Kaleo system. 
+Kaleo does not need to integrate directly with the IdP. Instead, a Kaleo user account can be provisioned just-in-time when a login request is made. Kaleo uses the cryptographically verified user information from the IdP (including first name, last name, email, job title, department, location) to immediately create an account in the Kaleo system, and then logs the user in, for a seamless experience.  Kaleo can be configured to allow logins **only** from your IdP, so if a user is removed from your IdP then they no longer will have the ability to log in to the Kaleo system.
 
 ![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Kaleo-SAML-SSO-Architecture-Diagram.png)
 
@@ -58,11 +58,20 @@ Salesforce.com can be used as an IdP, and Kaleo can authenticate users against i
 
 ![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Salesforce-Remote-Access-2.jpg)
 
+
+For newer versions of Salesforce that have the Connected Apps feature (instead of Remote Access), set Kaleo up like so:
+
+![](/images/SF-Apps.jpg)
+
+![](/images/SF-NewConnectedApp.jpg)
+
+
 ### Kaleo Salesforce Settings
 
-In Tenant Admin -> Settings, the following settings need to be created:
+In your Kaleo site, Tenant Admin -> Settings, the following settings need to be created. Create a new Setting for each key, and set the value to the appropriate value for your configuration:
 
 ```
+key: value
 authentication.salesforce.enabled: true
 authentication.salesforce.client_id: YOUR CLIENT ID
 authentication.salesforce.client_secret: YOUR SECRET
