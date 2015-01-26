@@ -46,6 +46,49 @@ This metadata XML can be imported into most IdP systems. Otherwise, by viewing t
 
 For instructions on how to configure Microsoft ADFS to work with Kaleo, read this [guide](/KaleoSSOADFSIntegration/KaleoSSOADFSIntegration.html).
 
+## Salesforce SAML Configuration
+
+Salesforce.com can be used as a SAML provider, and Kaleo can authenticate users against it.  
+
+### Enable Salesforce as an identity provider
+
+First, Enable Salesforce as an identity provider [here](https://help.salesforce.com/apex/HTViewHelpDoc?id=identity_provider_enable.htm&language=nl)
+
+Once that is complete, download the certificate to your local computer. *Remeber where you downloaded this.  We will need it for the next step.*
+
+<image src="/images/SF-Download-Certificate.png" width="800px" />
+
+### Create a new application in Salesforce
+
+Go to Build -> Create -> Apps, and click on the 'new' button in the Connected Apps section.
+
+The salesforce documentation for this process can be found [here](https://help.salesforce.com/apex/HTViewHelpDoc?id=connected_app_create.htm&language=en_US)
+
+<img src="/images/SF-CreateApp.png" width="800px" />
+
+From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint".  o the /admin panel of kaleosoftware.com 
+
+<img src="/images/SF-AppView.png" width="800px" />
+
+### Configure Kaleo
+
+Open your downloaded certificate, and extract the fingerprint code from it.  On a mac, right click the cert and "open" it. 
+
+<img src="/images/CertAuth.png" width="800px" />
+
+As an admin in Kaleo Software, go to My Account -> Admin Panel -> Settings.  (This URL will be https://<your domain.kaleosoftware.com/admin).
+
+The following settings need to be created: 
+
+```
+authentication.saml.idp_cert_fingerprint=<fingerprint from cert>
+authentication.saml.idp_sso_target_url=<<Enter SP-Initiated POST Endpoint URL from earlier>>
+authentication.saml.enabled=true
+```
+The final state should look something like:  
+
+<img src="/images/SF-KaleoAdminConfigured.png" width="800px" />
+
 ## Salesforce IdP Configuration
 
 Salesforce.com can be used as an IdP, and Kaleo can authenticate users against it.  First you need to set up an Authentication Provider, and then you need to set up Remote Access for Kaleo.
