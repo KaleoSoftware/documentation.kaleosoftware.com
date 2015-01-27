@@ -54,7 +54,7 @@ Salesforce.com can be used as a SAML provider, and Kaleo can authenticate users 
 
 First, Enable Salesforce as an identity provider [here](https://help.salesforce.com/apex/HTViewHelpDoc?id=identity_provider_enable.htm&language=nl)
 
-Once that is complete, download the certificate to your local computer. *Remeber where you downloaded this.  We will need it for the next step.*
+Once that is complete, download the certificate to your local computer. *Remember where you downloaded this.  We will need it for the next step.*
 
 <image src="/images/SF-Download-Certificate.png" width="800px" />
 
@@ -66,7 +66,7 @@ The salesforce documentation for this process can be found [here](https://help.s
 
 <img src="/images/SF-CreateApp.png" width="800px" />
 
-From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint".  o the /admin panel of kaleosoftware.com
+From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint" from the /admin panel of kaleosoftware.com
 
 <img src="/images/SF-AppView.png" width="800px" />
 
@@ -76,13 +76,13 @@ Open your downloaded certificate, and extract the fingerprint code from it.  On 
 
 <img src="/images/CertAuth.png" width="800px" />
 
-As an admin in Kaleo Software, go to My Account -> Admin Panel -> Settings.  (This URL will be https://<your domain.kaleosoftware.com/admin).
+As an admin in Kaleo Software, go to My Account -> Admin Panel -> Settings.  (This URL will be https://YOUR DOMAIN.kaleosoftware.com/admin).
 
 The following settings need to be created:
 
 ```
-authentication.saml.idp_cert_fingerprint=<fingerprint from cert>
-authentication.saml.idp_sso_target_url=<<Enter SP-Initiated POST Endpoint URL from earlier>>
+authentication.saml.idp_cert_fingerprint=YOUR FINGERPRINT
+authentication.saml.idp_sso_target_url=YOUR SP-Initiated POST Endpoint URL from earlier
 authentication.saml.enabled=true
 ```
 The final state should look something like:
