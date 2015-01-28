@@ -66,7 +66,7 @@ The salesforce documentation for this process can be found [here](https://help.s
 
 <img src="/images/SF-CreateApp.png" width="800px" />
 
-From the Connect App page, you must remember the value of "SP-Initiated POST Endpoint".  o the /admin panel of kaleosoftware.com 
+From the Connect App page, you must remember the value of "SP-Initiated Redirect Endpoint".  o the /admin panel of kaleosoftware.com 
 
 <img src="/images/SF-AppView.png" width="800px" />
 
@@ -82,7 +82,7 @@ The following settings need to be created:
 
 ```
 authentication.saml.idp_cert_fingerprint=<fingerprint from cert>
-authentication.saml.idp_sso_target_url=<<Enter SP-Initiated POST Endpoint URL from earlier>>
+authentication.saml.idp_sso_target_url=<<Enter SP-Initiated Redirect Endpoint URL from earlier>>
 authentication.saml.enabled=true
 ```
 The final state should look something like:  
