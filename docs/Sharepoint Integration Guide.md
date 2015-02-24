@@ -1,26 +1,10 @@
 # Sharepoint Integration Guide
 
-Kaleo content can be exposed in SharePoint in several ways. This guide will outline each method along with the strengths and weaknesses of each one.  This document focuses on the 2013 version of SharePoint, earlier versions of SharePoint may not support these techniques.
+Kaleo content can be exposed in SharePoint in several ways. This document focuses on the 2013 version of SharePoint, earlier versions of SharePoint may not support these techniques.
 
 ## Kaleo Widget WebPart
 
-Kaleo has a JavaScript API as well as a pre-built widget built on top of that API, utilizing standard web technologies (HTML/CSS/JavaScript).
-SharePoint has the ability to create a WebPart, which can host the Kaleo widget. First, you will need to configure a Kaleo Widget definition in your Kaleo tenant (see the [Kaleo Widget Embedding Guide](#widget-guide)). Each Widget is tied to a specific Kaleo Board, and will search only the content within that Board. Once you have a Kaleo Widget defined in Kaleo, you can paste the following code into your SharePoint WebPart:
-
-```html
-<script type="text/javascript">
-     KALEO_WIDGET_HOST = "https://your-tenant-name.kaleosoftware.com";
-     KALEO_WIDGET_TOKEN = "your-token-here";
-</script>
-<script type="text/javascript" src="https://your-tenant-name.kaleosoftware.com/assets/widgets/injector-v2.js"></script>
-```
-
-This will display the following widget, which is a search field that will search a specific Kaleo Board and return matching results:
-![](http://kaleo-web.s3.amazonaws.com/documentation_images/typeahead-widget.jpg)
-
-### Look-and-feel
-
-The Kaleo Widget can be styled either from scratch or by tweaking the existing CSS. This is done via the Kaleo Admin Panel -> Widget Settings -> Embedded CSS code.
+Sharepoint allows you to use our standard HTML widget as part of a WebPart. Follow the directions in the Kaleo Widget Guide V2.
 
 ### Authentication
 
