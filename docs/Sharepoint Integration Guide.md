@@ -4,26 +4,10 @@ Kaleo content can be exposed in SharePoint in several ways. This document focuse
 
 ## Kaleo Widget WebPart
 
-Sharepoint allows you to use our standard HTML widget as part of a WebPart. Follow the directions in the Kaleo Widget Guide V2.
-
-### Authentication
-
-The Kaleo Widget can be set to allow for unauthenticated read-only access, which will allow anyone with access to the page the widget lives on, to search Kaleo and view the results. If the user tries to post a question, they will be asked to sign in before proceeding.
-
-If you have SSO enabled for Kaleo, and are integrated with a SAML provider (i.e. Microsoft ADFS, Okta, OneLogin), then we can leverage that to make accessing the Kaleo widget more seamless to the user.
-
-To do this, we insert a hidden IFRAME into the page, which will initiate a SAML login and seamlessly authenticate the user, provided they already have a SAML session established. If they do *not* have an active session, then they will not be logged in and everything will behave as if the user is unauthenticated.
-
-```html
-<iframe
-  width='1' height='1'
-  style='visibility:hidden'
-  src='https://your-tenant-name.kaleosoftware.com/users/auth/saml?redirect_to=/widgets/saml_status'>
-</iframe>
-```
-
+Sharepoint allows you to use our standard HTML widget as part of a WebPart. Follow the directions in the Kaleo Widget Guide V4.
 
 ## SharePoint Crawler
+
 SharePoint has the ability to crawl websites, and add the content it finds to its internal search index.  Kaleo can be configured to expose a sitemap of a specific Board. A sitemap is an XML document that lists every piece of content, and a link to that content. Armed with this information, SharePoint can then crawl each page, index the content found on that page, and add it to its internal search index. When a user searches SharePoint, then Kaleo results will also be returned, intermingled with other SharePoint content, and sorted by relevance to the user’s query.
 One downside to this approach is that the crawler must be set to crawl Kaleo at specific intervals, and the results will only be as fresh as the last crawl.
 

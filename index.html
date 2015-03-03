@@ -14,24 +14,14 @@
 
     <script>
       $.ajaxSetup({ cache: false });
-      // Patch to load multiple md files
-      Flatdoc.file = function(locations) {
-        function loadData(locations, response, callback) {
-          if (locations.length === 0) callback(null, response);
-          else $.get(locations.shift()).done(function (data) {
-            loadData(locations, response + data, callback);
-          }).fail(function(data) {
-            callback(data, null)
-          });
-        }
-
-        return function(callback) {
-          loadData(locations instanceof Array ? locations : [locations], '', callback);
-        }
-      };
-
       Flatdoc.run({
-        fetcher: Flatdoc.file(['docs/Widget V2 Guide.md', 'docs/Sharepoint Integration Guide.md', 'docs/Salesforce Widget Guide.md', 'docs/API Guide.md', 'docs/SSO SAML Guide.md', 'docs/System Security.md'])
+        fetcher: Flatdoc.file(['docs/Widget V4 Guide.md',
+                               'docs/Sharepoint Integration Guide.md',
+                               'docs/Salesforce Widget Guide.md',
+                               'docs/API Guide.md',
+                               'docs/SSO SAML Guide.md',
+                               'docs/System Security.md',
+                               'docs/Widget V2 Guide.md'])
       });
     </script>
 

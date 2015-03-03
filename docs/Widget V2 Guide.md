@@ -1,4 +1,4 @@
-# Widget Guide V2
+# Widget Guide V2 (DEPRECATED)
 
 Kaleo is a SaaS application that can be accessed through a web browser. Kaleo also exposes an API, which allows other applications to interact with the Kaleo system.  Using this API, Kaleo provides a Widget that can be embedded into other applications, and provides users seamless access to Kaleo from wherever they are, instead of having to go to the main Kaleo website. This document will describe the Kaleo Widget (Version 2) and document where and how it can be used.
 
@@ -154,3 +154,4 @@ We accomplish this by using a hidden `<iframe>` tag, which will kick off a SAML 
   **Note for IE:** In order for this to work on Microsoft Internet Explorer, your SSO endpoint MUST serve an HTTP header called `P3P` in order for IE to save the cookies necessary for authentication. The contents of the P3P header should be something like `CP="HONK"` or `CP="This is not a privacy policy!"`. It doesn't matter what is in there, just that some string of characters are there.
 </div>
 
+&nbsp;
