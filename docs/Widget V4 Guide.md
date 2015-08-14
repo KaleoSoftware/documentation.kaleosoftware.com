@@ -6,7 +6,7 @@ Kaleo is a SaaS application that can be accessed through a web browser. Kaleo ca
 
 The Kaleo Widget is built using standard web technologies (HTML/JavaScript/CSS). The basic operation is similar to a Facebook or Twitter embeddable widget – a snippet of code (HTML/JavaScript/CSS) is pasted into the target app, and the Kaleo Widget appears on the target page.  The Kaleo Widget can be embedded easily in other web applications, provided they allow, and expose a mechanism, for embedding `<script>` tags into their pages.
 
-### Widget Embeddeding
+### Widget Embedding
 
 To implement the Kaleo widget, we need to inject it into the target page. This is done by pasting snippets of code into the target app.
 
@@ -77,6 +77,13 @@ The following snippet of JavaScript code activates the Kaleo Widget. This code s
 <script type="text/javascript" src="https://YOUR TENANT/assets/v4/widgets/injector.js" async defer></script>
 ```
 
+### Choosing a Sitemap
+
+You can start the Widget off at a particular point in a Sitemap by specifying a sitemap path in the `data-sitemap` attribute, so for example if you wanted a widget which used a sitemap called `/finance`, you would do this:
+
+```html
+<div class="kw-container" data-iframe-src="https://YOUR TENANT/v4/boards" data-sitemap="/finance"></div>
+```
 
 ### Advanced Customization
 
