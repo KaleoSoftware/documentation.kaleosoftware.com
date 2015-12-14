@@ -6,17 +6,28 @@ Kaleo supports Single Sign On (SSO), by integrating with corporate Identity Prov
 
 Kaleo does not need to integrate directly with the IdP. Instead, a Kaleo user account can be provisioned just-in-time when a login request is made. Kaleo uses the cryptographically verified user information from the IdP (including first name, last name, email, job title, department, location) to immediately create an account in the Kaleo system, and then logs the user in, for a seamless experience.  Kaleo can be configured to allow logins **only** from your IdP, so if a user is removed from your IdP then they no longer will have the ability to log in to the Kaleo system.
 
+If any claims data (i.e. firstname, lastname, job_title, etc) changes in your IdP, then the next time the user logs in to Kaleo and goes through the SAML process, the Kaleo values will be updated with the new values sent from the IdP.
+
 ![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/Kaleo-SAML-SSO-Architecture-Diagram.png)
 
 ### Kaleo SAML Configuration
 
-Your tenant must be configured for SSO. The following settings in Tenant Admin -> Settings should be created:
+Your tenant must be configured for SSO. The following settings in My Account -> Admin Panel -> Settings should be created. You will need to create a new setting record for each setting name.
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/settings1.jpg)
+
+![](http://documentation.kaleosoftware.com.s3.amazonaws.com/images/settings2.jpg)
+
 
 ```
 authentication.saml.enabled: true
 authentication.saml.idp_sso_target_url: https://YOUR_IDP_URL_HERE
 # The fingerprint of your X509 certificate
 authentication.saml.idp_cert_fingerprint: 12:34:56:67:89
+
+# OPTIONAL SETTINGS BELOW
+
+# By default, the authentication_context is set to both IE/Windows and Form based. You can specify one or the other like so:
 
 # For IE Windows-based authentication
 authentication.saml.authentication_context: urn:federation:authentication:windows
@@ -38,7 +49,7 @@ authentication.saml.claims.mobile_phone: mobile_phone
 
 Your SAML metadata can be found here:
 
-https://<YOUR TENANT NAME HERE>.kaleosoftware.com/sso/saml_metadata
+https://YOUR TENANT NAME HERE.kaleosoftware.com/sso/saml_metadata
 
 This metadata XML can be imported into most IdP systems. Otherwise, by viewing the information in the XML document, you can manually configure your IdP according to its documentation.
 
