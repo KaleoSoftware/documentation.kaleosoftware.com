@@ -117,7 +117,7 @@ https://adfs.company.com/adfs/ls/?SAMLRequest=...Base64 Encoded XML Request...&R
 
 To configure your Kaleo instance for Request Signing, go to the Tenant Admin -> Settings, and create a new setting:
 
-`authentication.saml.sign_requests` and set it's value to `false`.
+`authentication.saml.sign_requests` and set it's value to `true`.
 
 Kaleo will sign requests with a CA-signed certificate. The Kaleo key and the certificate trust chain are below.
 
