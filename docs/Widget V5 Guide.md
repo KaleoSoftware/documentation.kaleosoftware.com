@@ -77,7 +77,7 @@ The following snippet of HTML code defines the widget.
 The following snippet of JavaScript code activates the Kaleo Widget. This code should be pasted into the host page **after** the HTML code.
 
 ```html
-<script type="text/javascript" src="https://YOUR TENANT/assets/v4/widgets/injector.js" async defer></script>
+<script type="text/javascript" src="https://YOUR TENANT/assets/v5/widgets/injector.js" async defer></script>
 ```
 
 ### Advanced SSO Integration
