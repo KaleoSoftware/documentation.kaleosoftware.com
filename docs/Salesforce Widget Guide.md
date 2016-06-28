@@ -1,6 +1,6 @@
 # Salesforce Integration
 
-This is how to embed the Kaleo widget into the Salesforce home page. Things are complicated a bit by the fact that Salesforce does not allow components to (easily) adjust their height. So we have to use PostMessage in order to accomplish this. Here is what the widget looks like in its open and closed state. 
+This is how to embed the Kaleo widget into the Salesforce home page. Things are complicated a bit by the fact that Salesforce does not allow components to (easily) adjust their height. So we have to use PostMessage in order to accomplish this. Here is what the widget looks like in its open and closed state.
 
 ![](/images/SF-KaleoWidgetClosed.jpg)
 
@@ -13,18 +13,8 @@ First we need to make the Kaleo widget. In Build -> Develop -> Pages create a ne
 
 ``` html
 <apex:page>
-  <script type="text/javascript">
-    KaleoWidget = {};
-    KaleoWidget.config = [
-      //[DOM ID, Host URL, Widget Token]
-      ["kw-widget", "https://YOUR_TENANT_NAME.kaleosoftware.com", "YOUR_WIDGET_TOKEN"]
-    ];
 
-    (function(w,d,u){
-    a=d.createElement('script'),m=d.getElementsByTagName('script')[0];a.async=0;a.src=u;m.parentNode.insertBefore(a,m)
-    })(window,document,'https://YOUR_TENANT_NAME.kaleosoftware.com/assets/widget2/injector.js');
-  </script>
-
+  <script type="text/javascript" src="https://YOUR TENANT/assets/v4/widgets/injector.js" async defer></script>
 
   <style>
     /* BASE STYLES */
@@ -70,14 +60,8 @@ First we need to make the Kaleo widget. In Build -> Develop -> Pages create a ne
     }
   </style>
 
-  <div id="kw-widget" class="kw-container">
-    <div class="kw-button"></div>
-    <div class="kw-popover">
-      <div class="kw-popover-content">
-        <div class="kw-iframe-container"><!-- iframe will be injected here when icon is clicked --></div>
-      </div>
-    </div>
-  </div>
+  <div class="kw-container" data-iframe-src="https://YOUR TENANT/v5/widget" data-show-spinner="true"></div>
+  
 </apex:page>
 ```
 
@@ -89,7 +73,7 @@ In the Build -> Customize -> Home -> Home Page Layouts section, make sure the Ka
 
 ![](/images/SF-HomeLayout.jpg)
 
-At this point the Kaleo widget should show on your home page, but when you click the Kaleo Widget the height will not adjust and most of the widget will be hidden behind other Salesforce components. So we need to create another component on the page that acts as a proxy to listen for messages from the Kaleo Widget, and resize the iframe appropriately. 
+At this point the Kaleo widget should show on your home page, but when you click the Kaleo Widget the height will not adjust and most of the widget will be hidden behind other Salesforce components. So we need to create another component on the page that acts as a proxy to listen for messages from the Kaleo Widget, and resize the iframe appropriately.
 
 
 ## Resizing Proxy
@@ -147,9 +131,3 @@ Now, we can (finally!) add the custom links to the home page layout. Go to Build
 ![](/images/SF-Sidebar.jpg)
 
 You will now have a sidebar KaleoProxy component that does nothing but listen for resize events from the Kaleo widget and resizes the iframe. Unfortunately you can't hide the sidebar component, so your users will just have to ignore it. Maybe change the label to IgnoreMe or something.  Intrepid web developers might even find a way to hide it via Javascript, but we will leave that exercise to the reader.
-
-
-
-
-
-
