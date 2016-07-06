@@ -1,4 +1,4 @@
-# Widget Guide V4
+# Widget Guide V4 - DEPRECATED prefer using V5 widget
 
 Kaleo is a SaaS application that can be accessed through a web browser. Kaleo can also be embedded into other applications, which allows users to interact with the Kaleo system without leaving the application they are working in.  This document will describe the Kaleo Widget (Version 4) and document where and how it can be used.
 
