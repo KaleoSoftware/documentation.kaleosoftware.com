@@ -15,7 +15,7 @@ Kaleo currently utilizes several 3rd-party security vendors to perform routine s
 As an extra layer of protection, Kaleo deploys [CloudFlare](http://www.cloudflare.com) in front of our application servers. CloudFlare acts as a Content Delivery Network (CDN) to ensure fast, low-latency access to the Kaleo application no matter where is the world your are.  (NOTE: The CDN is used for static assets like images and Kaleo web site HTML/CSS/Javascript -- customer data is NEVER available outside of the secure Kaleo system itself.)  CloudFlare also provides advanced security features including Intrusion Prevention Systems (IPS) and Denial of Service (DoS) attack mitigation.
 
 
-All textual data entered into Kaleo by users is stored in the Kaleo PostgreSQL datastore, isolated from other Kaleo customers, and hosted at a secure Amazon facility. All data is encrypted at all times, in-motion via SSL, and also at-rest via disk encryption technology (PBKDF2-RIPEMD160).
+All textual data entered into Kaleo by users is stored in the Kaleo PostgreSQL datastore, isolated from other Kaleo customers, and hosted at a secure Amazon facility. All data is encrypted at all times, in-motion via SSL, and also at-rest via disk encryption technology (AES-256).
 
 All binary data uploaded by users to Kaleo, including Screencasts, Images, and Documents, is stored in Amazon's S3 cloud service, and is encrypted in motion via SSL, and at-rest using Amazons' server-side encryption technology.  All S3 URLs are also secure, signed URLs with an expiration date, to prevent unauthenticated access.
 
