@@ -1,133 +1,151 @@
-# Salesforce Integration
+# Kaleo Widget Salesforce Integration Instructions
 
-This is how to embed the Kaleo widget into the Salesforce home page. Things are complicated a bit by the fact that Salesforce does not allow components to (easily) adjust their height. So we have to use PostMessage in order to accomplish this. Here is what the widget looks like in its open and closed state.
+## Embedding the Kaleo Widget on Detail Pages
 
-![](/images/SF-KaleoWidgetClosed.jpg)
+![](images/SF-Embed-Widget-1.png)
 
-![](/images/SF-KaleoWidgetOpen.jpg)
+This integration will allow the embedding of the Kaleo widget within an
+object’s detail page as a Visualforce page layout element that can be
+placed and positioned using the standard page layout customization
+functionality.
 
+### 1. Create the Visualforce page element for the widget
 
-## Salesforce Widget
+Go to Setup&rarr;Develop&rarr;Visualforce Pages and click on the ‘New’
+button.
 
-First we need to make the Kaleo widget. In Build -> Develop -> Pages create a new VisualForce Page. Make sure you use YOUR tenant name and widget token in the javascript code below. Feel free to customize the CSS code below to suit your specific needs.
+Name the VisualForce Page “Kaleo VF” or any other name that makes sense
+to you.
 
-``` html
-<apex:page>
+Replace the existing default Visualforce page code with the following
+code snippet.
 
-  <script type="text/javascript" src="https://YOUR TENANT/assets/v4/widgets/injector.js" async defer></script>
-
-  <style>
-    /* BASE STYLES */
-    .kw-popover {
-      position: absolute;
-      height: 560px;
-      width: 560px;
-    }
-
-    .kw-iframe-container {
-      background: white;
-      position: absolute;
-      height: 540px;
-      width: 560px;
-    }
-
-    .kw-iframe-container iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
-
-      -moz-border-radius: 12px;
-      -webkit-border-radius: 12px;
-      border-radius: 12px;
-
-      -moz-box-shadow: 4px 4px 14px #000;
-      -webkit-box-shadow: 4px 4px 14px #000;
-      box-shadow: 4px 4px 14px #000;
-    }
-
-    .kw-container .kw-popover {display: none;}
-    .kw-container.kw-open .kw-popover {display: block;}
-
-    /* Replace the button that activates the Kaleo widget by using your own custom image here */
-    .kw-container .kw-button {
-      height: 50px;
-      background-repeat: no-repeat;
-      background-image: url("https://production.kaleosoftware.com/assets/widgets/placeholder-closed.png");
-    }
-
-    .kw-container.kw-open .kw-button {
-      background-image: url("https://production.kaleosoftware.com/assets/widgets/placeholder-open-2.png");
-    }
-  </style>
-
-  <div class="kw-container" data-iframe-src="https://YOUR TENANT/v5/widget" data-show-spinner="true"></div>
-  
+```
+<apex:page sidebar="false" showHeader="false" standardController="[Object Name]">      
+  <a href="https://[Your Client ID].kaleosoftware.com/v5/widget" 
+    onclick="window.open(this.href, 'kaleo_widget', 'left=20,top=20,width=500,height=500,toolbar=0,resizable=0'); return false;">
+    <img src="https://production.kaleosoftware.com/assets/widgets/placeholder-closed.png" />
+  </a>
 </apex:page>
 ```
 
-Now, go to Build -> Customize -> Home -> Home Page Components and create a new one to house the widget.
+Replace the \[Object Name\] with the API name of the object that you
+want to embed the widget on. If you want to put it on the Accounts
+detail page, replace it with “Account.” If you want to embed on a custom
+object’s page layout, use the custom object’s API name that’s in the
+format of “Object\_Name\_\_c.”
 
-![](/images/SF-HomePageComponent.jpg)
+Replace the \[Your Client ID\] part with your specific Kaleo ID provided
+to you.
 
-In the Build -> Customize -> Home -> Home Page Layouts section, make sure the Kaleo component is checked.
+Save the new VisualForce page.
 
-![](/images/SF-HomeLayout.jpg)
+###  2. Add the widget to the page layout
 
-At this point the Kaleo widget should show on your home page, but when you click the Kaleo Widget the height will not adjust and most of the widget will be hidden behind other Salesforce components. So we need to create another component on the page that acts as a proxy to listen for messages from the Kaleo Widget, and resize the iframe appropriately.
+Edit the Page Layout of your standard or custom object that you wish to
+have the Kaleo widget appear on. For this example, we use the Account
+layout.
 
+On the Page Layout editor, scroll down to Visualforce Pages on the left
+and select by clicking on it. You will then see the newly created
+Visualforce page element available to drag and drop onto your page
+layout.
 
-## Resizing Proxy
+![](images/SF-Embed-Widget-2.png)
 
-First we need to create a Static Resource that houses the raw Javascript code we will need later.  Save this code snippet to a file, and then in Salesforce create a new static resource (Build -> Develop -> Static Resources), and upload the file. Name the resource `KaleoProxy`. When complete, click View File and note the URL for the static resource, you will need it in the next step.
+To adjust the size of the embedded widget, click on the wrench tool on
+the upper right hand side of your embedded Visualforce page. This will
+bring up the Visualforce Page Properties settings menu. The standard
+height is 200px, and we recommend a height of 80px for this widget.
 
-```html
-  if (window.console == null) {
-    window.console = {};
-    window.console.log = function() {};
-  }
-  var receiveKaleoMessage = (function() {
-    function debugMsg(event) {
-      var msg;
-      msg = (typeof event.data == "string") ? event.data : JSON.stringify(event.data);
-      console.log(msg);
-    };
+![](images/SF-Embed-Widget-3.png)
 
-    function receiveMessage(event) {
-      debugMsg(event);
-      var data = (typeof event.data == "string") ? JSON.parse(event.data) : event.data;
-      if (data.kaleo && data.height && data.windowName) {
-        document.getElementById(data.windowName).style.height = data.height + "px";
-      }
-    };
-    return receiveMessage;
-  })();
-  window.addEventListener("message", receiveKaleoMessage, false);
+The widget is now embedded on your object’s detail page! This process
+can be repeated any number of times for your other object’s detail
+pages.
+
+## Creating a Custom Kaleo Lightning Navigation Menu Item
+
+![](images/SF-Embed-Widget-4.png)
+
+This process will allow you to have a custom Kaleo navigation item on
+your Salesforce instance’s Lightning Experience navigation menu.
+
+### 1. Create the Visualforce page element for the Lightning navigation item
+
+Go to Setup&rarr;Develop&rarr;Visualforce Pages and click on the ‘New’
+button.
+
+Name the VisualForce Page “Kaleo Lightning” or any other name that makes
+sense to you.
+
+Replace the existing default Visualforce page code with the following
+code snippet.
+
+```
+<apex:page sidebar="false" showHeader="false">         
+  <script>             
+    window.open('https:// [Your Client ID].kaleosoftware.com/v5/widget', 'kaleo_widget', 'left=20, top=20,width=500,height=500,toolbar=0,resizable=0');             
+    window.history.back();         
+  </script>  
+</apex:page>
 ```
 
-![](/images/SF-StaticResourceCode.jpg)
+Replace the \[Your Client ID\] part with your specific Kaleo ID provided
+to you.
 
-Now we need to inject this static resource into the home page. To do this, we create a new custom link (Build -> Customize -> Home -> Custom Links)
+Save the new VisualForce page.
 
-![](/images/SF-CustomLinkScript.jpg)
+### 2. Create a Visualforce tab using the VisualForce page
 
-* Label: KaleoProxy
-* Name: KaleoProxy
-* Behavior: Execute Javascript
-* Content Source: OnClick Javascript
-* Text field: {!REQUIRESCRIPT("/resource/1418160669000/KaleoProxy")}
+Go to Setup&rarr;Create&rarr;Tabs and select ‘New’ under VisualForce Tabs.
 
-(Use the URL for your static resource, which may be different. You dont need the host name, just the path "/resource/...etc" )
+On the next page, select the previously created VisualForce page and
+fill in the remaining fields for the Label and Name as you want it to
+appear.
 
-Now, go to Build -> Customize -> Home -> Home Page Components and create a new Links component, call it `KaleoProxyLink`
+![](images/SF-Embed-Widget-5.png)
 
-![](/images/SF-NewCustomLink.jpg)
+Click on the Lookup icon on the Tab Style to customize the tab style.
 
-On the next page, move the KaleoProxy custom links to the right.
+![](images/SF-Embed-Widget-6.png)
 
-![](/images/SF-NewCustomLink2.jpg)
+Select a standard icon. If you wish to use a custom icon, click on the
+“Create your own style” button and select a background color and an
+image from your Salesforce Documents. You may need to first upload your
+custom icon into Salesforce documents for it to be available for use.
+Icons should be 100 x 100 px and less than 20kb in size.
 
-Now, we can (finally!) add the custom links to the home page layout. Go to Build -> Customize -> Home -> Home Page Layouts and in the Select Narrow Components to show make sure KaleoProxy is checked. You can move it to the bottom so its out of the way.
+![](images/SF-Embed-Widget-7.png)
 
-![](/images/SF-Sidebar.jpg)
+### 3. Create a custom Lightning Navigation menu and add the custom Kaleo tab
 
-You will now have a sidebar KaleoProxy component that does nothing but listen for resize events from the Kaleo widget and resizes the iframe. Unfortunately you can't hide the sidebar component, so your users will just have to ignore it. Maybe change the label to IgnoreMe or something.  Intrepid web developers might even find a way to hide it via Javascript, but we will leave that exercise to the reader.
+Switch to Lightning Experience and click on the gear icon on the top
+right and go to Setup Home-&gt;Navigation Menus and click on ‘New’ to
+create a new custom menu. If you already have a custom menu you would
+like to add the tab to, you can skip this step and move onto adding the
+tab to your existing menu.
+
+Fill out the information for the new menu and click ‘Next.’
+
+![](images/SF-Embed-Widget-8.png)
+
+Select the available tabs that you would like to have on your custom
+menu. You will see that the Kaleo tab that you created previously will
+be available to select.
+
+![](images/SF-Embed-Widget-9.png)
+
+Finish selecting and ordering your custom menu tabs for Lightning
+navigation and hit ‘Next.’
+
+Finally, specify which Profiles should be assigned this navigation menu.
+Only those profiles you assign here will see your custom navigation menu
+when they are on Lightning Experience.
+
+![](images/SF-Embed-Widget-10.png)
+
+Hit ‘Save & Finish’
+
+The custom navigation menu will now to available to all profiles that
+you have assigned it to.
