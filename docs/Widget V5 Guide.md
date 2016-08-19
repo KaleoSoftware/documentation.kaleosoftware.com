@@ -13,6 +13,18 @@ Paste the following code into the host page (replace YOUR TENANT with the name o
 </a>
 ```
 
+### Targeting Widgets to Specific Boards
+
+You can configure a Widget in the Kaleo Admin (https://YOUR_TENANT.kaleosoftware.com/admin) and specify a set of Searchable Boards and Postable Boards for a specific Widget Token. You then reference this widget token in the URL, like so:
+
+```html
+<a href="https://YOUR TENANT.kaleosoftware.com/v5/widget?widget_token=1234" onclick="window.open(this.href, 'kaleo_widget', 'left=20,top=20,width=500,height=500,toolbar=0,resizable=0'); return false;" >
+  <img src="https://production.kaleosoftware.com/assets/widgets/placeholder-closed.png" />
+</a>
+```
+
+So in the above code, the `widget_token=1234` will cause Kaleo to look up the Widget Token and scope the widget to the specified boards for searching, and when the user clicks the Ask Kaleo button the boards will be restricted to the configured Postable Boards.
+
 ## Embedded Widget (IFRAME)
 
 The Kaleo Embedded Widget is built using standard web technologies (HTML/JavaScript/CSS). The basic operation is similar to a Facebook or Twitter embeddable widget – a snippet of code (HTML/JavaScript/CSS) is pasted into the target app, and the Kaleo Widget appears in an IFRAME in the host page.  The Kaleo Widget can be embedded easily in other web applications, provided they allow, and expose a mechanism, for embedding `<script>` tags into their pages.
