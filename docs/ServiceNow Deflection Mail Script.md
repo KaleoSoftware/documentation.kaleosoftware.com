@@ -5,19 +5,35 @@ When a user sends an email to ServiceNow to create a new Incident, Kaleo/Service
 ## End-User Experience
 The following screenshots show the flow from sending the initial email, through to closing the Incident.
 
+As usual, a person can send an email to the ServiceNow (SN) Helpdesk ...
+
 ![](/images/SNDeflectionMailScript1.jpg)
+
+... the email is converted into an Incident ...
 
 ![](/images/SNDeflectionMailScript2.jpg)
 
+... SN will respond to the requester with a confirmation email. If Kaleo has any matching results that may answer the person's question or issue, a section will be added to the bottom of the email with links to those results ...
+
 ![](/images/SNDeflectionMailScript3.jpg)
+
+... clicking a Kaleo link will open a browser to view the answer ...
 
 ![](/images/SNDeflectionMailScript4.jpg)
 
+... A note is saved to the SN Incident indicating the fact that the person viewed a particular Kaleo answer ...
+
 ![](/images/SNDeflectionMailScript5.jpg)
+
+... The requester can click the Close Ticket button while viewing the Kaleo answer ...
 
 ![](/images/SNDeflectionMailScript6.jpg)
 
+... the Incident will be marked closed and the close notes will indicate which Kaleo answer resolved the issue ...
+
 ![](/images/SNDeflectionMailScript7.jpg)
+
+... SN will notify the requester that their Incident has been closed.
 
 ![](/images/SNDeflectionMailScript8.jpg)
 
