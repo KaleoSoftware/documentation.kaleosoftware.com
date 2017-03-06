@@ -8,6 +8,8 @@ Kaleo's physical infrastructure is built using Amazon AWS EC2, hosted in secure 
 
 Kaleo follows the [Twelve Factor App](http://12factor.net/) methodology for system design and architecture, which is a set of best practices for building modern scalable, maintainable, and secure SaaS applications. All administrator access to Kaleo servers is secured via Two-Factor Authentication, and strictly limited to key personnel.
 
+Kaleo follows immutable infrastructure practices, where all Kaleo infrastructure is declaratively defined in code, that is used to build up servers from a known-good, hardened base image. When new OS software or patches need to be deployed, a new image is built and attached to the Amazon Elastic Load Balancer, and the old images are destroyed. Immutable infrastructure benefits include lower IT complexity and failures, improved security and easier troubleshooting than on mutable infrastructure. It eliminates server patching and configuration changes, because each update to the service or application workload initiates a new, tested and up-to-date instance. If the new instance does not meet expectations, it is simple to roll back to the prior known-good instance.
+
 Kaleo logs all OS and Web App events into a centralized logging/analysis/monitoring system, which alerts Kaleo system administrators to any abnormal behavior, potential attacks, or performance/availability issues.
 
 Kaleo currently utilizes several 3rd-party security vendors to perform routine scans on the site from the outside and test for any known vulnerabilities.
@@ -48,14 +50,18 @@ For Kaleo customers under a valid service agreement, all data submitted by the c
 
 - Amazon RDS Postgres Database [US-East, USA] (Text data entered into the Kaleo system)
 - Amazon S3 [Multi-region USA] (Document, Images, Videos, Screencasts uploaded to the Kaleo system)
-- ElasticSearch [US-East, USA] (Text data is indexed for search features)
+- Elastic Search [US-East, USA] (Text data is indexed for search features)
 
 ### Temporary Storage
 
-- CloudWatch [USA] (System logs, scrubbed of passwords/API tokens/etc, stored for 1 year)
-- CloudTrail [USA] (System audit logs of all administrative actions, stored for 1 year)
-- Database Backups [USA] (Rolling backups are stored for up to 1 year)
-- Analytics [USA] (Usage analytics, stored for 5 years)
+- Amazon CloudWatch [USA] (System logs, scrubbed of passwords/API tokens/etc, stored for 1 year)
+- Amazon CloudTrail [USA] (System audit logs of all administrative actions, stored for 5 years)
+- Amazon Database Backups [USA] (Rolling backups are stored for up to 1 year)
+- Analytics [USA] (Application usage analytics, stored for up to 5 years)
+
+### Ephemeral Storage
+
+- Amazon ElastiCache [US-East, USA] (Cache of frequently accessed content for performance, 30 days max)
 
 ### Retention
 
@@ -63,12 +69,12 @@ Kaleo will retain customer data for as long as a customer has a valid services a
 
 ### Destruction
 
-Upon customer request, Kaleo will destroy all customer data in their possession. Kaleo will:
+Upon customer request, Kaleo will destroy all customer data. Kaleo will:
 
 - Delete customer's Postgres Schema and all backups
 - Delete customer's S3 Objects, Versions, and finally Bucket
-- Delete customer's ElasticSearch Index
-
-Other metadata pertaining to the customer may still be retained, such as audit logs, web access logs, and analytics. However, to the extent that any of this data contains Personally Identifiable Information, it is an internal Kaleo user_id, and once the customer database has been destroyed, the mapping of that user_id to a specific identifiable person is lost.
+- Delete customer's Elastic Search Index
 
 Note that Kaleo will issue the necessary DELETE commands to Amazon, but we rely on Amazon to actually delete the data from their physical systems. Also note that all customer data is stored encrypted-at-rest using Amazon's KMS encryption technology.
+
+Other metadata pertaining to the customer may still be retained, such as audit logs, web access logs, and analytics. However, to the extent that any of this data contains Personally Identifiable Information, it is an internal Kaleo user_id, and once the customer database has been destroyed, the mapping of that user_id to a specific identifiable person is lost.

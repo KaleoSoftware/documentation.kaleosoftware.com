@@ -63,20 +63,20 @@ Team members will establish and follow one of the following procedures basing th
 
 The team may create additional procedures which are not foreseen in this document. If there is no applicable procedure in place, the team must document what was done and later establish a procedure for the incident.
 
-Team members will use forensic techniques, including reviewing system logs, looking for gaps in logs, reviewing intrusion detection logs, and interviewing witnesses and the incident victim to determine how the incident was caused. Only authorized personnel should be performing interviews or examining evidence.
+Team members will use forensic techniques, including reviewing system logs, looking for gaps in logs, reviewing CloudWatch / CloudTrail logs, and interviewing witnesses and the incident victim to determine how the incident was caused. Only authorized personnel should be performing interviews or examining evidence.
 
 Team members will recommend changes to prevent the occurrence from happening again or infecting other systems.
 
 Upon management approval, the changes will be implemented.
 
-Team members will restore the affected system(s) to the uninfected state. They may do any or more of the following:
+Team members will restore the affected system(s) to the uninfected / operational state. They may do any or more of the following:
 
-- Re-install the affected system(s) from scratch and restore data from backups if necessary. (Preserve evidence before doing this.)
-- Make users change passwords if passwords may have been sniffed.
-- Be sure the system has been hardened by turning off or uninstalling unused services.
-- Be sure the system is fully patched.
-- Be sure real time virus protection and intrusion detection is running.
+- Remove all VMs for affected services from the production Load Balancer.
+- Stop all VMs, but do not destroy them in order to preserve evidence.
+- Utilize Ansible scripts to rebuild VMs from scratch using known-good base image
+- Boot new VMs and attach to production Load Balancer
 - Be sure the system is logging the correct events and to the proper level.
+- Make users change passwords if passwords may have been sniffed.
 
 ## Create Incident Report
 
