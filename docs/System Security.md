@@ -12,13 +12,20 @@ Kaleo follows immutable infrastructure practices, where all Kaleo infrastructure
 
 Kaleo logs all OS and Web App events into a centralized logging/analysis/monitoring system, which alerts Kaleo system administrators to any abnormal behavior, potential attacks, or performance/availability issues.
 
-Kaleo currently utilizes several 3rd-party security vendors to perform routine scans on the site from the outside and test for any known vulnerabilities.
-
 As an extra layer of protection, Kaleo deploys [CloudFlare](http://www.cloudflare.com) in front of our application servers. CloudFlare acts as a Content Delivery Network (CDN) to ensure fast, low-latency access to the Kaleo application no matter where is the world your are.  (NOTE: The CDN is used for static assets like images and Kaleo web site HTML/CSS/Javascript -- customer data is NEVER available outside of the secure Kaleo system itself.)  CloudFlare also provides advanced security features including Intrusion Prevention Systems (IPS) and Denial of Service (DoS) attack mitigation.
 
 All textual data entered into Kaleo by users is stored in the Kaleo PostgreSQL datastore, isolated from other Kaleo customers, and hosted at a secure Amazon facility. All data is encrypted at all times, in-motion via SSL, and also at-rest via disk encryption technology (AES-256).
 
 All binary data uploaded by users to Kaleo, including Screencasts, Images, and Documents, is stored in Amazon's S3 cloud service, and is encrypted in motion via SSL, and at-rest using Amazons' server-side encryption technology.  All S3 URLs are also secure, signed URLs with an expiration date, to prevent unauthenticated access.
+
+## Penetration Tests and Security Audits
+
+Kaleo currently utilizes several 3rd-party security vendors to perform daily automated scans on the site from the outside and test for any known vulnerabilities. A manual penetration test is performed annually.
+
+## Software Development Lifecycle
+
+Kaleo's SLDC is an Agile process based on industry best-practices (OWASP, CMM). Development is done on Github with Pull Requests for code reviews. Linters (es-lint, etc) are used to enforce code style. Security reviews are an integral part of the Code Review process, and automated unit/functional/integration tests are written for every feature, and static analysis is done as part of a Continuous Integration / Continuous Delivery process.
+
 
 ## Personally Identifiable Information (PII) Collection
 
